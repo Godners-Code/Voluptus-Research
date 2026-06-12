@@ -28,7 +28,6 @@ def modify_links(html_content):
     updated = re.sub(pattern, replacer, html_content, flags=re.IGNORECASE)
     return updated
 
-
 def main():
     # 获取当前工作目录的绝对路径
     base_dir = os.path.abspath(".")
