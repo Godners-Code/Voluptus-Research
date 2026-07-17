@@ -2,11 +2,9 @@ name: "[WORKFLOW] Deploy Markdown to GitHub Pages"
 
 on:
   workflow_dispatch:
-    branches:
-      - main
   push:
-    branches:
-      - main
+    paths-ignore:
+      - '.github/**'
 
 permissions:
   contents: write
@@ -27,24 +25,7 @@ jobs:
     steps:
       - name: "[STEP] Checkout Repository via Action"
         uses: actions/checkout@main
-
-      - name: "[STEP] Rrepare Pandoc via Commands"
-        run: sudo apt-get install -y pandoc
-
-      - name: "[STEP] Prepare Python via Action"
-        uses: actions/setup-python@main
-      
-      - name: "[STEP] Build HTML and Convert Links via Python"
-        run: python .github/workflows/deploy.py
-
-      - name: "[STEP] Setup Pages via Action"
-        uses: actions/configure-pages@main
-
-      - name: "[STEP] Upload Artifact via Action"
-        uses: actions/upload-pages-artifact@main
+      - name: Markdown to GitHub Pages Deploy
+        uses: Godners-Code/deploy-markdown-pages@main
         with:
-          path: ./_site
-
-      - name: "[STEP] Deploy to GitHub Pages"
-        id: deployment
-        uses: actions/deploy-pages@main
+          page-title: "Voluptus Research"
